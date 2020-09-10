@@ -7,8 +7,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.weatherexample.data.db.entity.CURRENT_WEATHER_ID
 import com.example.weatherexample.data.db.entity.CurrentWeatherEntry
-import com.example.weatherexample.data.db.network.response.ImperialCurrentWeatherEntry
-import com.example.weatherexample.data.db.network.response.MetricCurrentWeatherEntry
+import com.example.weatherexample.data.network.response.ImperialCurrentWeatherEntry
+import com.example.weatherexample.data.network.response.MetricCurrentWeatherEntry
 
 /**
  * These functions is used to put the data

@@ -1,6 +1,6 @@
-package com.example.weatherexample.data
+package com.example.weatherexample.data.network
 
-import com.example.weatherexample.data.db.network.response.CurrentWeatherResponse
+import com.example.weatherexample.data.network.response.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -41,7 +41,9 @@ interface ApixuWeatherApiService {
         /**
          * This inserts the api key into each query
          */
-        operator fun invoke(): ApixuWeatherApiService{
+        operator fun invoke(
+            connectivtyInterceptor: ConnectivityInterceptor
+        ): ApixuWeatherApiService {
             val requestInterceptor = Interceptor{ chain ->
                 val url = chain.request()
                     .url()
@@ -58,6 +60,7 @@ interface ApixuWeatherApiService {
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivtyInterceptor)
                 .build()
 
             return Retrofit.Builder()
