@@ -35,19 +35,13 @@ class CurrentWeatherFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
-        // TODO: Use the ViewModel
 
-        val apiService = ApixuWeatherApiService(ConnectivityInterceptorImpl(this.requireContext()))
-        val weatherNetworkDataSource = WeatherNetworkDataSourceImpl(apiService)
+        bindUI()
+    }
 
-        weatherNetworkDataSource.downloadedCurrentWeather.observe(viewLifecycleOwner, Observer {
-            textView.text = it.toString()
-        })
+    private fun bindUI() = launch{
+        val currentWeather = viewModel.weather.await()
 
-        GlobalScope.launch(Dispatchers.Main) {
-            val currentWeatherResponse = apiService.getCurrentWeather("Atlanta").await()
-            weatherNetworkDataSource.fetchCurrentWeather("Atlanta", "en")
-        }
     }
 
 }
