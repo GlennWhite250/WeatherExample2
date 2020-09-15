@@ -58,7 +58,7 @@
     </TextView>
 
     <ImageView
-        android:id="@+id/iv_condition_icon"
+        android:id="@+id/iv_condition_icon2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -73,8 +73,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.207"
         app:layout_constraintWidth_percent="0.25"
-        tools:src="@drawable/ic_weather_sunny"
-        tools:tint="#F9A920">
+        app:srcCompat = "@drawable/ic_weather_sunny">
     </ImageView>
 
     <TextView
@@ -85,11 +84,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_condition_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_condition_icon2"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_condition_icon"
+        app:layout_constraintTop_toTopOf="@+id/iv_condition_icon2"
         app:layout_constraintVertical_bias="1.0"
         tools:text="25.0°C">
     </TextView>

@@ -2,21 +2,15 @@ package com.example.weatherexample.ui.weather.current
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.weatherexample.R
-import com.example.weatherexample.data.network.ApixuWeatherApiService
-import com.example.weatherexample.data.network.ConnectivityInterceptorImpl
-import com.example.weatherexample.data.network.WeatherNetworkDataSourceImpl
 import com.example.weatherexample.internal.glide.GlideApp
 import com.example.weatherexample.ui.base.ScopedFragment
 import kotlinx.android.synthetic.main.current_weather_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -46,56 +40,56 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     private fun bindUI() = launch{
         val currentWeather = viewModel.weather.await()
         currentWeather.observe(viewLifecycleOwner, Observer {
-            if(it == null) return@Observer
+            if (it == null) return@Observer
+
             group_loading.visibility = View.GONE
-            updateLocation("Los Angeles")
             updateDateToToday()
             updateTemperatures(it.temperature, it.feelsLikeTemperature)
             updateCondition(it.conditionText)
             updatePrecipitation(it.precipitationVolume)
             updateWind(it.windDirection, it.windSpeed)
-            updateVisiblity(it.visibilityDistance)
+            updateVisibility(it.visibilityDistance)
 
             GlideApp.with(this@CurrentWeatherFragment)
                 .load("http:${it.conditionIconUrl}")
-                .into(iv_condition_icon)
-        })
+                .into(iv_condition_icon2)
+    })
     }
 
-    private fun chooseLocalUnitAbbreviation(metric: String, imperial: String): String{
-        return if(viewModel.isMetric) "°C" else "°F"
+    private fun chooseLocalizedUnitAbbreviation(metric: String, imperial: String): String {
+        return if (viewModel.isMetric) metric else imperial
     }
 
-    private fun updateLocation(location: String){
+    private fun updateLocation(location: String) {
         (activity as? AppCompatActivity)?.supportActionBar?.title = location
     }
 
-    private fun updateDateToToday(){
+    private fun updateDateToToday() {
         (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "Today"
     }
 
-    private fun updateTemperatures(temperature: Double, feelsLike: Double){
-        val unitAbbreviation = chooseLocalUnitAbbreviation("°C", "°F")
+    private fun updateTemperatures(temperature: Double, feelsLike: Double) {
+        val unitAbbreviation = chooseLocalizedUnitAbbreviation("°C", "°F")
         tv_temperature.text = "$temperature$unitAbbreviation"
         tv_feels_like_temperature.text = "Feels like $feelsLike$unitAbbreviation"
     }
 
-    private fun updateCondition(condition: String){
+    private fun updateCondition(condition: String) {
         tv_condition.text = condition
     }
 
-    private fun updatePrecipitation(precipitationVolume: Double){
-        val unitAbbreviation = chooseLocalUnitAbbreviation("mm", "in")
+    private fun updatePrecipitation(precipitationVolume: Double) {
+        val unitAbbreviation = chooseLocalizedUnitAbbreviation("mm", "in")
         tv_precipitation.text = "Preciptiation: $precipitationVolume $unitAbbreviation"
     }
 
-    private fun updateWind(windDirection: String, windSpeed: Double){
-        val unitAbbreviation = chooseLocalUnitAbbreviation("kph", "mph")
+    private fun updateWind(windDirection: String, windSpeed: Double) {
+        val unitAbbreviation = chooseLocalizedUnitAbbreviation("kph", "mph")
         tv_wind.text = "Wind: $windDirection, $windSpeed $unitAbbreviation"
     }
 
-    private fun updateVisiblity(visiblityDistance: Double){
-        val unitAbbreviation = chooseLocalUnitAbbreviation("km", "mi")
-        tv_visibility.text = "Visibility: $visiblityDistance $unitAbbreviation"
+    private fun updateVisibility(visibilityDistance: Double) {
+        val unitAbbreviation = chooseLocalizedUnitAbbreviation("km", "mi.")
+        tv_visibility.text = "Visibility: $visibilityDistance $unitAbbreviation"
     }
 }
