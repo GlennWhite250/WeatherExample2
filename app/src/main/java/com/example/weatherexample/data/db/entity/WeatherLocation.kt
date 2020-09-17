@@ -14,7 +14,6 @@ const val WEATHER_LOCATION_ID = 0
 data class WeatherLocation(
     val country: String,
     val lat: Double,
-    //val localtime: String,
     @SerializedName("localtime_epoch")
     val localtimeEpoch: Long,
     val lon: Double,
