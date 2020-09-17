@@ -7,12 +7,13 @@ import androidx.room.RoomDatabase
 import com.example.weatherexample.data.db.entity.CurrentWeatherEntry
 
 
-@Database(entities = [CurrentWeatherEntry::class], version = 1)
+@Database(entities = [CurrentWeatherEntry::class, WeatherLocationDao::class], version = 1)
 abstract class ForecastDatabase: RoomDatabase() {
     /**
      * This will return an instance of the Dao that was created
      */
     abstract fun currentWeatherDao(): CurrentWeatherDao
+    abstract fun weatherLocationDao(): WeatherLocationDao
 
     /**
      * this is making the database a Singleton
