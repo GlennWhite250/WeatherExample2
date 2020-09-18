@@ -8,20 +8,20 @@ import com.example.weatherexample.data.db.unitlocalized.UnitSpecificCurrentWeath
  * This is for the US
  */
 data class ImperialCurrentWeatherEntry(
-    @ColumnInfo(name = "tempF")
+    @ColumnInfo(name = "temp_f")
     override val temperature: Double,
     @ColumnInfo(name = "condition_text")
     override val conditionText: String,
     @ColumnInfo(name = "condition_icon")
     override val conditionIconUrl: String,
-    @ColumnInfo(name = "windMph")
+    @ColumnInfo(name = "wind_mph")
     override val windSpeed: Double,
-    @ColumnInfo(name = "windDir")
+    @ColumnInfo(name = "wind_dir")
     override val windDirection: String,
-    @ColumnInfo(name = "precipIn")
+    @ColumnInfo(name = "precip_in")
     override val precipitationVolume: Double,
-    @ColumnInfo(name = "feelslikeF")
+    @ColumnInfo(name = "feelslike_f")
     override val feelsLikeTemperature: Double,
-    @ColumnInfo(name = "visMiles")
+    @ColumnInfo(name = "vis_miles")
     override val visibilityDistance: Double
 ): UnitSpecificCurrentWeatherEntry
