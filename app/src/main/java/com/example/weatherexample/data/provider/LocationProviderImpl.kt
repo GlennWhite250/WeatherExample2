@@ -8,6 +8,6 @@ class LocationProviderImpl : LocationProvider {
     }
 
     override suspend fun getPreferredLocationString(): String {
-        return "Atlanta"
+        return "Columbus"
     }
 }

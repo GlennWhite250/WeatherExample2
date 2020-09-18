@@ -23,7 +23,7 @@ data class WeatherLocation(
     val tzId: String
 ){
     @PrimaryKey(autoGenerate = false)
-    val id: Int = WEATHER_LOCATION_ID
+    var id: Int = WEATHER_LOCATION_ID
 
     val zonedDateTime: ZonedDateTime
     get() {
